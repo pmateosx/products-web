@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import styled from "@emotion/styled";
+import Navbar from "./components/Navbar";
+import ProductView from './views/Products';
+import Home from './views/Home';
+import NewProduct from './views/NewProduct';
+
+const AppContainer = styled.main`
+  padding-top: 5rem;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  background-color: #FAFBFB;
+`
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar/>
+      <AppContainer>
+        <Routes>
+          <Route path='/'element={<Home/>}/>
+          <Route path='/product'element={<ProductView/>}/>
+          <Route path='/newproduct'element={<NewProduct/>}/>
+        </Routes>
+      </AppContainer>
+    </>
   );
 }
 
