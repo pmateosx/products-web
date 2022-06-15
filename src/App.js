@@ -20,9 +20,9 @@ function App() {
       <Navbar/>
       <AppContainer>
         <Routes>
-          <Route path='/'element={<Home/>}/>
-          <Route path='/product'element={<ProductView/>}/>
-          <Route path='/newproduct'element={<NewProduct/>}/>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/product' element={<ProductView/>}/>
+          <Route path='/newproduct' element={<NewProduct/>}/>
         </Routes>
       </AppContainer>
     </>
