@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { listProducts } from '../../../services/ProductService';
+import { deleteProduct, listProducts } from '../../../services/ProductService';
 
 const initialState = {
   products: [],
@@ -11,15 +11,10 @@ const productsListSlice = createSlice({
   reducers: {
     getItemsList: (state, action) => {
       state.products = action.payload;
-    },
-    removeItem: (state, action) => {
-      const itemId = action.payload;
-      state.productsListItem = state.productsListItem.filter((item) => item.id !== itemId);
-    },
+    }
   },
 });
 
-// console.log(cartSlice);
 export const { removeItem, getItemsList } =
 productsListSlice.actions;
 
@@ -30,4 +25,13 @@ export const fetchAllProducts = () => (dispatch) => {
     })
     .catch((error) => console.log(error))
 }
+
+export const doDeleteProduct = (id) => (dispatch) => {
+  deleteProduct(id)
+    .then(() => {
+      dispatch(fetchAllProducts())
+    })
+    .catch((error) => console.log(error))
+}
+
 export default productsListSlice.reducer;

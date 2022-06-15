@@ -1,7 +1,11 @@
 import styled from "@emotion/styled"
 import { Link } from "react-router-dom"
+import { FiX, FiAlertCircle } from "react-icons/fi";
+import { doDeleteProduct } from "../store/features/products/productsListSlice";
+import { useDispatch } from "react-redux";
 
 const Card = styled.div`
+    position: relative;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -65,7 +69,6 @@ const Section = styled.div`
     flex-direction: row;
     margin-top: 1rem;
 `
-
 const Button = styled(Link)`
     background-color: #3A78F2;
     padding: 1rem 3rem;
@@ -78,18 +81,50 @@ const Button = styled(Link)`
         transform: scale(1.1);
     }
 `
+const Close = styled.i`
+    position: absolute;
+    top: 40px; 
+    right: 40px; 
+    border-radius: 50%;
+    padding: 0.5rem;
+    font-size: 0.5rem;
+    background-color: #E1E1E1;
 
+    :hover{
+        cursor: pointer;
+    }
+`
+const Used = styled.div`
+    position: absolute;
+    top: 41px; 
+    right: 70px; 
+    background-color: #E1E1E1;
+    font-size: 0.5rem;
+    border-radius: 10px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+`
 
-const ProductCard = ({name, description, price, used, image}) => {
+const ProductCard = ({name, description, price, used, image, id}) => {
+    const dispatch = useDispatch()
+    const handleDelete = (id) => {
+        dispatch(doDeleteProduct(id))
+    }
     return(
         <Card>
+            {used && (
+                <Used><FiAlertCircle/>Used</Used>
+            )}
+            <Close onClick={()=> handleDelete(id)}><FiX/></Close>
             <Image>
                 <img src={image} alt={name}/>
             </Image>
             <Title>{name}</Title>
             <Description>{description}</Description>
             <Section>
-                <Button to={'/'}>View</Button>
+                <Button to={`/products/${id}`}>View</Button>
                 <Price>{price}<small>€</small></Price>
             </Section>
            

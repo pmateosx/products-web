@@ -4,7 +4,6 @@ import { useEffect } from "react"
 import { fetchAllProducts } from "../store/features/products/productsListSlice"
 import styled from "@emotion/styled"
 
-
 const CardContainer = styled.section`
     display: flex;
     justify-content: center;
@@ -32,6 +31,7 @@ const ProductView = () => {
                 image={item.image} 
                 price={item.price} 
                 used={item.used}
+                id={item._id}
             />
         ))) : 'Not products yet'}
         </CardContainer>
