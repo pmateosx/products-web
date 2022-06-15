@@ -1,5 +1,9 @@
 import styled from "@emotion/styled"
 import { NavLink } from "react-router-dom"
+import { useForm } from 'react-hook-form'
+import * as yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useState } from 'react'
 
 const Nav = styled.nav`
     position: fixed;
@@ -9,6 +13,7 @@ const Nav = styled.nav`
     justify-content: space-between;
     align-items: center;
     background-color: white;
+    z-index: 10;
 `
 const Logo = styled.div`
     padding: 0 2rem;
@@ -30,6 +35,8 @@ const StyledLink = styled(NavLink)`
 `
 
 const Navbar = () => {
+    const [error, setError] = useState(false)
+    
     return(
         <Nav>
             <Logo>
@@ -39,7 +46,7 @@ const Navbar = () => {
             </Logo>
             <Ul>
                 <StyledLink to='/product'>Products</StyledLink>
-                <StyledLink to='/newproduct'>Add Products</StyledLink>
+                <StyledLink to='/new-product'>Add Products</StyledLink>
              {/*    <NavLink>Add Product</NavLink> */}
             </Ul>
         </Nav>
