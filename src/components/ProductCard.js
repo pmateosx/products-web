@@ -89,15 +89,17 @@ const Close = styled.i`
     padding: 0.5rem;
     font-size: 0.5rem;
     background-color: #E1E1E1;
+    transition: transform .2s;
 
     :hover{
         cursor: pointer;
+        transform: scale(1.1);
     }
 `
 const Used = styled.div`
     position: absolute;
-    top: 41px; 
-    right: 70px; 
+    top: 230px; 
+    right: 40px; 
     background-color: #E1E1E1;
     font-size: 0.5rem;
     border-radius: 10px;
@@ -106,14 +108,38 @@ const Used = styled.div`
     align-items: center;
     gap: 0.3rem;
 `
+const EditButton = styled.div`
+    position: absolute;
+    top: 41px; 
+    right: 70px; 
+    background-color: #E1E1E1;
+    font-size: 0.5rem;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    transition: transform .2s;
+    a{
+        text-decoration: none;
+        color: black;
+    }
+
+    :hover{
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+`
 
 const ProductCard = ({name, description, price, used, image, id}) => {
     const dispatch = useDispatch()
+
     const handleDelete = (id) => {
         dispatch(doDeleteProduct(id))
     }
+
     return(
         <Card>
+            <EditButton><Link to={`/update-product/${id}`}>Edit</Link></EditButton>
             {used && (
                 <Used><FiAlertCircle/>Used</Used>
             )}

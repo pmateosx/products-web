@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { deleteProduct, listProducts } from '../../../services/ProductService';
+import { deleteProduct, listProducts, updateProduct } from '../../../services/ProductService';
 
 const initialState = {
   products: [],
@@ -28,6 +28,14 @@ export const fetchAllProducts = () => (dispatch) => {
 
 export const doDeleteProduct = (id) => (dispatch) => {
   deleteProduct(id)
+    .then(() => {
+      dispatch(fetchAllProducts())
+    })
+    .catch((error) => console.log(error))
+}
+
+export const doUpdateProduct = (id, data) => (dispatch) => {
+  updateProduct(id, data)
     .then(() => {
       dispatch(fetchAllProducts())
     })
