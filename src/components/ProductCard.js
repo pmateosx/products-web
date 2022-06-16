@@ -150,7 +150,7 @@ const ProductCard = ({name, description, price, used, image, id}) => {
             <Title>{name}</Title>
             <Description>{description}</Description>
             <Section>
-                <Button to={`/products/${id}`}>View</Button>
+                <Button to={`/product/${id}`}>View</Button>
                 <Price>{price}<small>€</small></Price>
             </Section>
            

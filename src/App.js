@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import ProductView from './views/Products';
 import Home from './views/Home';
 import NewProduct from './views/NewProduct';
+import ProductDetail from './views/ProductDetail';
+import EditProduct from './views/EditProduct';
 
 const AppContainer = styled.main`
   padding-top: 5rem;
@@ -23,7 +25,8 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/product' element={<ProductView/>}/>
           <Route path='/new-product' element={<NewProduct/>}/>
-          <Route path='/update-product' element={<NewProduct/>}/>
+          <Route path='/update-product/:id' element={<EditProduct/>}/>
+          <Route path='/product/:id' element={<ProductDetail/>}/>
         </Routes>
       </AppContainer>
     </>
