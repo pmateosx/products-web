@@ -9,6 +9,7 @@ const HomeContainer = styled.section`
     position: relative;
     width: 100vw;
     position: relative;
+    margin-top: -15rem;
 `
 const H1 = styled.h1`
     font-size: 4.5rem;

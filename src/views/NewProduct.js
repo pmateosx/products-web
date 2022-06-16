@@ -17,6 +17,10 @@ const Form = styled.form`
     width: 50%;
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 768px){
+        width: 80%;
+    }
 `
 const Input = styled.input`
     width: 100%;
@@ -46,7 +50,8 @@ const Label = styled.label`
     margin-top: 2.2rem;
     @media (max-width: 768px){
         font-size: 0.7rem;
-        content: "Image";
+        padding: 0 5px;
+        justify-content: center;
     }
     `
 const Group = styled.div`

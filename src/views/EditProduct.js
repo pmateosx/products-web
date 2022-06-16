@@ -8,7 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getProduct, updateProduct } from "../services/ProductService";
 
 
-const NewProductContainer = styled.section`
+const EditProductContainer = styled.section`
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -18,6 +18,10 @@ const Form = styled.form`
     width: 50%;
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 768px){
+        width: 80%;
+    }
 `
 const Input = styled.input`
     width: 100%;
@@ -45,6 +49,11 @@ const Label = styled.label`
     gap: 1rem;
     cursor: pointer;
     margin-top: 2.2rem;
+    @media (max-width: 768px){
+        font-size: 0.7rem;
+        padding: 0 5px;
+        justify-content: center;
+    }
     `
 const Group = styled.div`
     display: flex;
@@ -72,6 +81,11 @@ const RadialGroup = styled.div `
     justify-content: space-between;
     align-items: center;
     margin-top: 2rem;
+    @media (max-width: 768px){
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 1rem;
+    }
 `
 const SubmitButton = styled.button`
     margin-top: 2rem;
@@ -104,7 +118,6 @@ const ErrorMessage = styled.small`
     color: red;
     margin: 0.2rem 0;
 `
-
 const schema = yup.object({
     name: yup.string().required('Name is required'),
     description: yup.string().required('Description is required'),
@@ -156,14 +169,13 @@ const schema = yup.object({
           } else {
             updateProduct(product._id, bodyFormData)
               .then((productUpdated) => {navigate("/product")
-                console.log(productUpdated)
             })
               .catch(err => setError(err?.response?.data?.errors))
           }
       }
 
     return ( 
-        <NewProductContainer>
+        <EditProductContainer>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <h2>Edit your product</h2>
                 <Container>
@@ -201,7 +213,7 @@ const schema = yup.object({
             <SubmitButton>Edit</SubmitButton>
             </Form>
             {error && <ErrorMessage>Something has gone wrong, try again.</ErrorMessage>}
-        </NewProductContainer>
+        </EditProductContainer>
     )
 }
 
