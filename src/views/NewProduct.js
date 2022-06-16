@@ -1,5 +1,14 @@
 import styled from "@emotion/styled"
 import { FiUploadCloud } from "react-icons/fi"
+import { useForm } from 'react-hook-form'
+import * as yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { fetchAllProducts } from "../store/features/products/productsListSlice";
+import { useNavigate } from "react-router-dom";
+import { createProduct } from "../services/ProductService";
+
 
 const NewProductContainer = styled.section`
     display: flex;
@@ -9,6 +18,8 @@ const NewProductContainer = styled.section`
 `
 const Form = styled.form`
     width: 50%;
+    display: flex;
+    flex-direction: column;
 `
 const Input = styled.input`
     width: 100%;
@@ -16,7 +27,7 @@ const Input = styled.input`
     border-radius: 10px;
     border: 1px solid rgb(228, 228, 228);
     color: rgb(118, 118, 118);
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding-left: 10px;
     margin-top:0.5rem;
 `
@@ -35,25 +46,29 @@ const Label = styled.label`
     padding-left: 20px;
     gap: 1rem;
     cursor: pointer;
+    margin-top: 2.2rem;
     `
 const Group = styled.div`
     display: flex;
     justify-content: center;
-    align-items: flex-end;
-    width: 104%;
-    margin-top:0.5rem;
-
-    Input {
-        width: 80%;
-    }
+    align-items: center;
+    width: 100%;
 `
 const InputWrapper = styled.div `
     display: flex;
     flex-direction: column;
+    width: 100%;
+    input{
+        width: 80%;
+    }
 `
 const RadialInput = styled.input`
+    cursor: pointer;
 `
 
+const RadialLabel = styled.label`
+    cursor: pointer;
+`
 const RadialGroup = styled.div `
     display: flex;
     justify-content: space-between;
@@ -79,36 +94,94 @@ const SubmitButton = styled.button`
         transform: scale(1.01);
     }
 `
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    height: 96px;
+    width: 100%;
+`
+const ErrorMessage = styled.small`
+    color: red;
+    margin: 0.2rem 0;
+`
+const schema = yup.object({
+    name: yup.string().required('Name is required'),
+    description: yup.string().required('Description is required'),
+    price: yup.number().typeError('You must specify a number').required('Amount is required'),
+    used: yup.boolean().required('Check a box'),
+  }).required();
 
 const NewProduct = () => {
+    const [error, setError] = useState(false)
+    const navigate = useNavigate()
+
+    const {handleSubmit, register, formState:{ errors } } = useForm({
+        resolver: yupResolver(schema)
+    })
+
+    const onSubmit = (data) => {
+        const bodyFormData = new FormData()
+      
+        const { image, ...rest } = data
+ 
+        Object.keys(rest).forEach(key => {
+          bodyFormData.append(key, rest[key])
+        })
+      
+        if (image[0]) {
+          bodyFormData.append("image", image[0])
+        }
+    
+        if (!rest) {
+            setError(true)
+          } else {
+            createProduct(bodyFormData)
+              .then(() => navigate("/product"))
+              .catch(err => setError(err?.response?.data?.errors))
+          }
+      }
+
     return ( 
         <NewProductContainer>
-            <Form>
+            <Form onSubmit={handleSubmit(onSubmit)}>
                 <h2>Create your product</h2>
-                <label>Product Name</label>
-                <Input/>
-                <label>Description</label>
-                <Input/>
+                <Container>
+                    <label>Product Name</label>
+                    <Input {...register('name')}/>
+                    {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+                </Container>
+                <Container>
+                    <label>Description</label>
+                    <Input {...register('description')}/>
+                    {errors.description && <ErrorMessage>{errors.description.message}</ErrorMessage>}
+                </Container>
                 <Group>
                     <InputWrapper>
                         <label> Price </label>
-                        <Input type="number"/>
+                        <Input type="number" {...register('price')} min="0" max="99999"/>
+                        {errors.price && <ErrorMessage>{errors.price.message}</ErrorMessage>}
                     </InputWrapper>
-                    <Label>
-                        <FiUploadCloud />
-                        Select Image
-                        <File type="file"/>
-                    </Label>
+                    <Container>
+                        <Label>
+                            <FiUploadCloud />
+                            Select Image
+                            <File type="file" {...register('image')}/>
+                        </Label>
+                    </Container>
                 </Group>
                 <RadialGroup>
-                <label>Is a used product?</label>
+                    <label>Is a used product?</label>
                     <div>
-                        <label><RadialInput type="radio" name="used" value="true" /> Yes! </label>
-                        <label><RadialInput type="radio" name="used" value="false"/> Nope! </label>
+                        <RadialLabel><RadialInput {...register('used')} type="radio" name="used" value="true" /> Yes! </RadialLabel>
+                        <RadialLabel><RadialInput {...register('used')} type="radio" name="used" value="false"/> Nope! </RadialLabel>
                     </div>
                 </RadialGroup>
+                        {errors.used && <ErrorMessage>Check one box</ErrorMessage>}
             <SubmitButton>Create</SubmitButton>
             </Form>
+            {error && <ErrorMessage>Something has gone wrong, try again.</ErrorMessage>}
         </NewProductContainer>
     )
 }

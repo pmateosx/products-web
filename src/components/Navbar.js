@@ -1,9 +1,5 @@
 import styled from "@emotion/styled"
 import { NavLink } from "react-router-dom"
-import { useForm } from 'react-hook-form'
-import * as yup from "yup";
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useState } from 'react'
 
 const Nav = styled.nav`
     position: fixed;
@@ -35,8 +31,6 @@ const StyledLink = styled(NavLink)`
 `
 
 const Navbar = () => {
-    const [error, setError] = useState(false)
-    
     return(
         <Nav>
             <Logo>
