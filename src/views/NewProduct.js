@@ -4,8 +4,6 @@ import { useForm } from 'react-hook-form'
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { fetchAllProducts } from "../store/features/products/productsListSlice";
 import { useNavigate } from "react-router-dom";
 import { createProduct } from "../services/ProductService";
 
@@ -13,7 +11,7 @@ import { createProduct } from "../services/ProductService";
 const NewProductContainer = styled.section`
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 100vw;
 `
 const Form = styled.form`

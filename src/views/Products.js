@@ -7,7 +7,7 @@ import styled from "@emotion/styled"
 const CardContainer = styled.section`
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100vw;
