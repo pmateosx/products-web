@@ -7,7 +7,7 @@ const HomeContainer = styled.section`
     align-items: center;
     flex-direction: column;
     position: relative;
-    width: 100vw;
+    min-width: 100vw;
     position: relative;
     margin-top: -15rem;
 `

@@ -11,7 +11,7 @@ const NewProductContainer = styled.section`
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    width: 100vw;
+    min-width: 100vw;
 `
 const Form = styled.form`
     width: 50%;

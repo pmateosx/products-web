@@ -7,8 +7,9 @@ import { FiAlertCircle } from "react-icons/fi";
 const DetailContainer = styled.section`
     display: flex;
     justify-content: center;
-    width: 100vw;
-    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
+    margin-bottom: 4rem;
     @media (max-width: 768px) {
         flex-direction: column;
         align-items: center;
