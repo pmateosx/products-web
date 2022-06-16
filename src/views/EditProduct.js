@@ -138,13 +138,13 @@ const schema = yup.object({
 
     useEffect(() => {
         getProduct(id)
-          .then(product => {
-            setProduct(product)
-            setValue('name', product.name)
-            setValue('description', product.description)
-            setValue('price', product.price)
-            setValue('image', product.image)
-            setValue('used', product.used)
+          .then(productFound => {
+            setProduct(productFound)
+            setValue('name', productFound.name)
+            setValue('description', productFound.description)
+            setValue('price', productFound.price)
+            setValue('image', productFound.image)
+            setValue('used', productFound.used)
         })
           .catch(error => {
             console.log(error)
@@ -164,11 +164,11 @@ const schema = yup.object({
         if (image[0]) {
           bodyFormData.append("image", image[0])
         }
-    
+
         if (!rest) {
             setError(true)
           } else {
-            updateProduct(id, bodyFormData)
+            updateProduct(id, data)
               .then(() => {navigate("/product")
             })
               .catch(err => setError(err?.response?.data?.errors))
