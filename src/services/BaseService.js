@@ -2,7 +2,7 @@ import axios from "axios";
 
 const createHttp = () => {
     const http = axios.create({
-        baseURL: 'http://localhost:3001/api'
+        baseURL: 'https://product-api.onrender.com/api'
     })
 
     http.interceptors.response.use(

@@ -10,7 +10,9 @@ const Nav = styled.nav`
     align-items: center;
     background-color: white;
     z-index: 10;
-    box-shadow: 0px 1px 36px 0px rgba(0,0,0,0.02) 
+    box-shadow: 0px 1px 36px 0px rgba(0,0,0,0.04); 
+    overflow-x: hidden;
+    max-width: 100vw;
 `
 const Logo = styled.div`
     padding: 0 2rem;

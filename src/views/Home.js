@@ -22,6 +22,10 @@ const H1 = styled.h1`
         background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+    @media (max-width: 768px){
+        font-size: 2.5rem;
+        width: 20rem;
+    }
 `
 const Button = styled(Link)`
     background-color: #3A78F2;

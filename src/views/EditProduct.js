@@ -104,6 +104,7 @@ const ErrorMessage = styled.small`
     color: red;
     margin: 0.2rem 0;
 `
+
 const schema = yup.object({
     name: yup.string().required('Name is required'),
     description: yup.string().required('Description is required'),
@@ -111,7 +112,11 @@ const schema = yup.object({
     used: yup.boolean().required('Check a box'),
   }).required();
 
-const EditProduct = () => {
+  
+  const EditProduct = () => {
+    const {handleSubmit, register, formState:{ errors }, setValue } = useForm({
+      resolver: yupResolver(schema)
+  })
     const [error, setError] = useState(false)
     const navigate = useNavigate()
 
@@ -131,11 +136,7 @@ const EditProduct = () => {
             console.log(error)
             navigate('/product')
         })
-      },[id, navigate])
-
-    const {handleSubmit, register, formState:{ errors }, setValue } = useForm({
-        resolver: yupResolver(schema)
-    })
+      },[id, navigate, setValue])
 
     const onSubmit = (data) => {
         const bodyFormData = new FormData()

@@ -10,10 +10,11 @@ import EditProduct from './views/EditProduct';
 const AppContainer = styled.main`
   padding-top: 5rem;
   height: 100vh;
-  width: 100vw;
   display: flex;
   justify-content: center;
   background-color: #FAFBFB;
+  overflow-x: hidden;
+  max-width: 100vw;
 `
 
 function App() {
