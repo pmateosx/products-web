@@ -44,6 +44,10 @@ const Label = styled.label`
     gap: 1rem;
     cursor: pointer;
     margin-top: 2.2rem;
+    @media (max-width: 768px){
+        font-size: 0.7rem;
+        content: "Image";
+    }
     `
 const Group = styled.div`
     display: flex;
@@ -71,6 +75,11 @@ const RadialGroup = styled.div `
     justify-content: space-between;
     align-items: center;
     margin-top: 2rem;
+    @media (max-width: 768px){
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 1rem;
+    }
 `
 const SubmitButton = styled.button`
     margin-top: 2rem;
