@@ -9,7 +9,7 @@ import EditProduct from './views/EditProduct';
 
 const AppContainer = styled.main`
   padding-top: 5rem;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   background-color: #FAFBFB;

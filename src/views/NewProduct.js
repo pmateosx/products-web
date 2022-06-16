@@ -185,8 +185,8 @@ const NewProduct = () => {
                 <RadialGroup>
                     <label>Is a used product?</label>
                     <div>
-                        <RadialLabel><RadialInput {...register('used')} type="radio" name="used" value="true" /> Yes! </RadialLabel>
-                        <RadialLabel><RadialInput {...register('used')} type="radio" name="used" value="false"/> Nope! </RadialLabel>
+                        <RadialLabel><RadialInput {...register('used')} type="radio" name="used" value={true} /> Yes! </RadialLabel>
+                        <RadialLabel><RadialInput {...register('used')} type="radio" name="used" value={false}/> Nope! </RadialLabel>
                     </div>
                 </RadialGroup>
                         {errors.used && <ErrorMessage>Check one box</ErrorMessage>}

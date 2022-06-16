@@ -144,6 +144,7 @@ const schema = yup.object({
             setValue('description', product.description)
             setValue('price', product.price)
             setValue('image', product.image)
+            setValue('used', product.used)
         })
           .catch(error => {
             console.log(error)
@@ -205,11 +206,11 @@ const schema = yup.object({
                 <RadialGroup>
                     <label>Is a used product?</label>
                     <div>
-                        <RadialLabel><RadialInput {...register('used')} type="radio" name="used" value="true" /> Yes! </RadialLabel>
-                        <RadialLabel><RadialInput {...register('used')} type="radio" name="used" value="false"/> Nope! </RadialLabel>
+                        <RadialLabel><RadialInput {...register('used')} type="radio" name="used" value={true} /> Yes! </RadialLabel>
+                        <RadialLabel><RadialInput {...register('used')} type="radio" name="used" value={false}/> Nope! </RadialLabel>
                     </div>
                 </RadialGroup>
-                        {errors.used && <ErrorMessage>Check one box</ErrorMessage>}
+                {errors.used && <ErrorMessage>Check one box</ErrorMessage>}
             <SubmitButton>Edit</SubmitButton>
             </Form>
             {error && <ErrorMessage>Something has gone wrong, try again.</ErrorMessage>}
