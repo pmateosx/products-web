@@ -6,6 +6,7 @@ import Home from './views/Home';
 import NewProduct from './views/NewProduct';
 import ProductDetail from './views/ProductDetail';
 import EditProduct from './views/EditProduct';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AppContainer = styled.main`
   padding-top: 5rem;
@@ -29,6 +30,10 @@ function App() {
           <Route path='/update-product/:id' element={<EditProduct/>}/>
           <Route path='/product/:id' element={<ProductDetail/>}/>
         </Routes>
+        <Toaster
+          position="bottom-right"
+          reverseOrder={false}
+        />
       </AppContainer>
     </>
   );

@@ -6,6 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createProduct } from "../services/ProductService";
+import toast from 'react-hot-toast';
+
 
 const NewProductContainer = styled.section`
     display: flex;
@@ -127,6 +129,7 @@ const schema = yup.object({
 const NewProduct = () => {
     const [error, setError] = useState(false)
     const navigate = useNavigate()
+    const notify = () => toast.success('New product added.');
 
     const {handleSubmit, register, formState:{ errors } } = useForm({
         resolver: yupResolver(schema)
@@ -149,7 +152,10 @@ const NewProduct = () => {
             setError(true)
           } else {
             createProduct(bodyFormData)
-              .then(() => navigate("/product"))
+              .then(() => {
+                notify()
+                navigate("/product")
+            })
               .catch(err => setError(err?.response?.data?.errors))
           }
       }

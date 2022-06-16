@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { FiX, FiAlertCircle } from "react-icons/fi";
 import { doDeleteProduct } from "../store/features/products/productsListSlice";
 import { useDispatch } from "react-redux";
+import toast from 'react-hot-toast';
 
 const Card = styled.div`
     position: relative;
@@ -132,9 +133,14 @@ const EditButton = styled.div`
 
 const ProductCard = ({name, description, price, used, image, id}) => {
     const dispatch = useDispatch()
+    const notify = () => toast('Product deleted.', {
+        icon: '❌',
+      })
+      
 
     const handleDelete = (id) => {
         dispatch(doDeleteProduct(id))
+        notify()
     }
 
     return(
