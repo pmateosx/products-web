@@ -31,11 +31,10 @@ const H2 = styled.h2`
     text-align: left;
 `
 const ProductImage = styled.img`
-    width: 100%;
     border-radius: 15px;
-    @media (max-width: 768px) {
-        height: auto;
-    }
+    width: 100%; /* width of container *//* height of container */
+    object-fit: cover;
+
 `
 const SectionText = styled.div `
     display: flex;
@@ -99,6 +98,11 @@ const Group = styled.div`
         margin-bottom: -5rem;
     }
 `
+const CropImage = styled.div`
+    max-height: 380px;
+    overflow: hidden;
+    display: flex;
+`
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -119,7 +123,9 @@ const ProductDetail = () => {
         <Section>
             <H2>Product Detail</H2>
             <Group>
-                <ProductImage src={product.image}/>
+                <CropImage>
+                    <ProductImage src={product.image}/>
+                </CropImage>
                 <EditButton to={`/update-product/${product._id}`}>Edit</EditButton>
             </Group>
         </Section>
