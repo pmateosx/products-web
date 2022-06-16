@@ -94,7 +94,8 @@ const EditButton = styled(Link)`
 const Group = styled.div`
     position: relative;
     @media (max-width: 768px) {
-        width: 50%;
+        width: 100%;
+        margin-bottom: -5rem;
     }
 `
 

@@ -11,6 +11,7 @@ const CardContainer = styled.section`
     flex-direction: row;
     flex-wrap: wrap;
     width: 100vw;
+    padding-bottom: 5rem;
 `
 
 const ProductView = () => {

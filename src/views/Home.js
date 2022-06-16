@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const HomeContainer = styled.section`
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     position: relative;

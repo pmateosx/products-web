@@ -7,7 +7,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createProduct } from "../services/ProductService";
 
-
 const NewProductContainer = styled.section`
     display: flex;
     justify-content: center;
