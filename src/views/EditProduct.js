@@ -167,8 +167,8 @@ const schema = yup.object({
         if (!rest) {
             setError(true)
           } else {
-            updateProduct(product._id, bodyFormData)
-              .then((productUpdated) => {navigate("/product")
+            updateProduct(id, bodyFormData)
+              .then(() => {navigate("/product")
             })
               .catch(err => setError(err?.response?.data?.errors))
           }
